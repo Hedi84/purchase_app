@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_125548) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_124611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "item_options", force: :cascade do |t|
     t.string "name"
     t.integer "allocation"
-    t.string "desccription"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,9 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_125548) do
     t.bigint "item_option_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "purchase_id", null: false
     t.index ["item_option_id"], name: "index_items_on_item_option_id"
-    t.index ["purchase_id"], name: "index_items_on_purchase_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -47,7 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_125548) do
   end
 
   add_foreign_key "items", "item_options"
-  add_foreign_key "items", "purchases"
   add_foreign_key "purchases", "items"
   add_foreign_key "purchases", "users"
 end

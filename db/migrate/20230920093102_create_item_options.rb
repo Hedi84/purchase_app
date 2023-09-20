@@ -3,7 +3,7 @@ class CreateItemOptions < ActiveRecord::Migration[7.0]
     create_table :item_options do |t|
       t.string :name
       t.integer :allocation
-      t.string :desccription
+      t.string :description
 
       t.timestamps
     end

@@ -10,14 +10,13 @@ describe 'Purchase API' do
       parameter name: :purchase, in: :body, schema: {
         type: :object,
         properties: {
-          item_id: { type: :integer },
           user_id: { type: :integer }
         },
         required: [ 'email' ]
       }
 
       response '201', 'purchase created' do
-        let(:purchase) { { user_id: 1, item_id: 6 } }
+        let(:purchase) { { user_id: 1 } }
         run_test!
       end
 
@@ -39,12 +38,12 @@ describe 'Purchase API' do
         schema type: :object,
           properties: {
             id: { type: :integer, },
-            item_id: { type: :integer },
+
             user_id: { type: :integer }
           },
           required: [ 'id', 'email' ]
 
-        let(:id) { Purchase.create(user_id: 8, item_id: 5).id }
+        let(:id) { Purchase.create(user_id: 8).id }
         run_test!
       end
 

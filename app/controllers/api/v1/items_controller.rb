@@ -18,6 +18,7 @@ class Api::V1::ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
+      @item.update_allocation
       render json: @item.to_json(only: [:id, :purchase_id, :item_option_id]), status: :created
     else
       render json: @item.errors, status: :unprocessable_entity

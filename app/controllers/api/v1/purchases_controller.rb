@@ -18,7 +18,7 @@ class Api::V1::PurchasesController < ApplicationController
     @purchase = Purchase.new(purchase_params)
 
     if @purchase.save
-      render json: @purchase.to_json(only: [:id, :user_id, :item_id])
+      render json: @purchase.to_json(only: [:id, :user_id])
     else
       render json: @purchase.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class Api::V1::PurchasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_params
-      params.fetch(:purchase).permit(:user_id, :item_id)
+      params.fetch(:purchase).permit(:user_id)
     end
 end
