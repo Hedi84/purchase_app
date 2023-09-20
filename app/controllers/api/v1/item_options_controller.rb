@@ -18,7 +18,7 @@ class Api::V1::ItemOptionsController < ApplicationController
     @item_option = ItemOption.new(item_option_params)
 
     if @item_option.save
-      render json: @item_option.to_json(only: [:id, :name, :description, ::allocation]), status: :created
+      render json: @item_option.to_json(only: [:id, :name, :description, :allocation]), status: :created
       render json: @item_option.errors, status: :unprocessable_entity
     end
   end

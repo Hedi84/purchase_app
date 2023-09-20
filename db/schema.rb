@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_093102) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_125548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,4 +22,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_093102) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "item_option_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "purchase_id", null: false
+    t.index ["item_option_id"], name: "index_items_on_item_option_id"
+    t.index ["purchase_id"], name: "index_items_on_purchase_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_purchases_on_item_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "items", "item_options"
+  add_foreign_key "items", "purchases"
+  add_foreign_key "purchases", "items"
+  add_foreign_key "purchases", "users"
 end

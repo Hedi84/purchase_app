@@ -94,6 +94,228 @@ paths:
                 - allocation
         '404':
           description: item_option not found
+  "/api/v1/items":
+    post:
+      summary: Creates a item
+      tags:
+      - Item
+      parameters: []
+      responses:
+        '201':
+          description: item created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                item_option_id:
+                  type: integer
+                purchase_id:
+                  type: integer
+              required:
+              - email
+          application/xml:
+            schema:
+              type: object
+              properties:
+                item_option_id:
+                  type: integer
+                purchase_id:
+                  type: integer
+              required:
+              - email
+  "/api/v1/items/{id}":
+    get:
+      summary: Retrieves a item
+      tags:
+      - Item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  item_option_id:
+                    type: integer
+                  purchase_id:
+                    type: integer
+                required:
+                - id
+                - item_option_id
+                - purchase_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  item_option_id:
+                    type: integer
+                  purchase_id:
+                    type: integer
+                required:
+                - id
+                - item_option_id
+                - purchase_id
+        '404':
+          description: item not found
+  "/api/v1/purchases":
+    post:
+      summary: Creates a purchase
+      tags:
+      - Purchase
+      parameters: []
+      responses:
+        '201':
+          description: purchase created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                item_id:
+                  type: integer
+                user_id:
+                  type: integer
+              required:
+              - email
+          application/xml:
+            schema:
+              type: object
+              properties:
+                item_id:
+                  type: integer
+                user_id:
+                  type: integer
+              required:
+              - email
+  "/api/v1/purchases/{id}":
+    get:
+      summary: Retrieves a purchase
+      tags:
+      - Purchase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  item_id:
+                    type: integer
+                  user_id:
+                    type: integer
+                required:
+                - id
+                - email
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  item_id:
+                    type: integer
+                  user_id:
+                    type: integer
+                required:
+                - id
+                - email
+        '404':
+          description: purchase not found
+  "/api/v1/users":
+    post:
+      summary: Creates a user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '201':
+          description: user created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+          application/xml:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+  "/api/v1/users/{id}":
+    get:
+      summary: Retrieves a user
+      tags:
+      - User
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                required:
+                - id
+                - email
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                required:
+                - id
+                - email
+        '404':
+          description: user not found
 servers:
 - url: https://{defaultHost}
   variables:

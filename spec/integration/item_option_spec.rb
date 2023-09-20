@@ -1,5 +1,3 @@
-
-# spec/integration/pets_spec.rb
 require 'swagger_helper'
 
 describe 'ItemOptions API' do
