@@ -1,0 +1,101 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/item_options":
+    post:
+      summary: Creates a item_option
+      tags:
+      - ItemOption
+      parameters: []
+      responses:
+        '201':
+          description: item_option created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                allocation:
+                  type: integer
+              required:
+              - name
+              - allocation
+              - description
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                allocation:
+                  type: integer
+              required:
+              - name
+              - allocation
+              - description
+  "/api/v1/item_options/{id}":
+    get:
+      summary: Retrieves a item_option
+      tags:
+      - ItemOption
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  allocation:
+                    type: integer
+                required:
+                - id
+                - name
+                - allocation
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  allocation:
+                    type: integer
+                required:
+                - id
+                - name
+                - allocation
+        '404':
+          description: item_option not found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
