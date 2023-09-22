@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /api/v1/users/1
   def show
-    render json: @user.to_json(only: [:id, :email])
+    render json: @user.to_json
   end
 
   # POST /api/v1/users
@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user.to_json(only: [:id, :email]) status: :created
+      render json: @user.to_json, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.fetch(:user).permit(:email)
+      params.permit(:email)
     end
 end

@@ -10,7 +10,7 @@ class Api::V1::ItemOptionsController < ApplicationController
 
   # GET /api/v1/item_options/1
   def show
-    render json: @item_option.to_json(only: [:id, :name, :description, ::allocation])
+    render json: @item_option.to_json
   end
 
   # POST /api/v1/item_options
@@ -18,7 +18,7 @@ class Api::V1::ItemOptionsController < ApplicationController
     @item_option = ItemOption.new(item_option_params)
 
     if @item_option.save
-      render json: @item_option.to_json(only: [:id, :name, :description, :allocation]), status: :created
+      render json: @item_option.to_json, status: :created
       render json: @item_option.errors, status: :unprocessable_entity
     end
   end
@@ -45,6 +45,6 @@ class Api::V1::ItemOptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_option_params
-      params.fetch(:item_option).permit(:name, :description, :allocation)
+      params.permit(:name, :description, :allocation)
     end
 end

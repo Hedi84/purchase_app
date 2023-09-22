@@ -189,8 +189,6 @@ paths:
             schema:
               type: object
               properties:
-                item_id:
-                  type: integer
                 user_id:
                   type: integer
               required:
@@ -199,8 +197,6 @@ paths:
             schema:
               type: object
               properties:
-                item_id:
-                  type: integer
                 user_id:
                   type: integer
               required:
@@ -226,8 +222,6 @@ paths:
                 properties:
                   id:
                     type: integer
-                  item_id:
-                    type: integer
                   user_id:
                     type: integer
                 required:
@@ -238,8 +232,6 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: integer
-                  item_id:
                     type: integer
                   user_id:
                     type: integer

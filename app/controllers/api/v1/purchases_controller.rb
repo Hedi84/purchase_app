@@ -15,10 +15,12 @@ class Api::V1::PurchasesController < ApplicationController
 
   # POST /api/v1/purchases
   def create
-    @purchase = Purchase.new(purchase_params)
+    @item = Item.new({item_option_id: params[:item_option_id] })
+    @purchase = Purchase.new({ user_id: purchase_params[:users_id], item_id: @item.id })
 
-    if @purchase.save
-      render json: @purchase.to_json(only: [:id, :user_id])
+    if @item.save && @purchase.save
+      @item.update_allocation
+      render json: @purchase.to_json(include: :item)
     else
       render json: @purchase.errors, status: :unprocessable_entity
     end
@@ -27,7 +29,7 @@ class Api::V1::PurchasesController < ApplicationController
   # PATCH/PUT /api/v1/purchases/1
   def update
     if @purchase.update(purchase_params)
-      render json: @purchase
+      render json: @purchase.to_json(include: :item)
     else
       render json: @purchase.errors, status: :unprocessable_entity
     end
@@ -46,6 +48,6 @@ class Api::V1::PurchasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_params
-      params.fetch(:purchase).permit(:user_id)
+      params.permit(:user_id, :item_option_id)
     end
 end
